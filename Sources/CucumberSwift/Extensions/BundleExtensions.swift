@@ -10,10 +10,6 @@ import Foundation
 
 extension Bundle {
     var resolvedForSPM: Bundle {
-        #if canImport(CucumberSwift_ObjC)
         return Bundle.module
-        #else
-        return self
-        #endif
     }
 }
