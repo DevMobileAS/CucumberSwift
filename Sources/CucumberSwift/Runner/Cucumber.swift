@@ -11,7 +11,7 @@ import XCTest
 import CucumberSwiftExpressions
 
 @objc public class Cucumber: NSObject { // swiftlint:disable:this type_body_length
-    static var shared = Cucumber()
+    public static var shared = Cucumber()
 
     var features = [Feature]()
     var currentStep: Step?
@@ -20,6 +20,11 @@ import CucumberSwiftExpressions
 
     private var reverseOrderForAfterHooks: Bool {
         (Cucumber.shared as? StepImplementation)?.reverseOrderForAfterHooks ?? false
+    }
+
+    // Can be used in combination with tagging features with @selected to explictitly enable specific tests and ignore the rest
+    @objc public var cucumberSelectionIsEnabled: Bool {
+        Cucumber.shared.environment["enableCucumberSelection"] != nil
     }
 
     private var _beforeFeatureHooks = [FeatureHook]()
@@ -158,7 +163,7 @@ import CucumberSwiftExpressions
            let lastScenarioStep = scenario.steps.last,
            lastScenarioStep === step {
             Cucumber.shared.afterScenarioHooks.forEach { $0.hook(scenario) }
-            let result: Reporter.Result = (scenario.steps.contains { $0.result == .failed }) ? .failed : .passed
+            let result: Reporter.Result = (scenario.steps.contains { $0.result == .failed }) ? .skipped : .passed
             reporters.forEach { $0.didFinish(scenario: scenario,
                                              result: result,
                                              duration: Measurement(value: Date().timeIntervalSince(scenario.startDate),
@@ -169,7 +174,7 @@ import CucumberSwiftExpressions
            let lastStep = feature.scenarios.last(where: { !$0.steps.isEmpty })?.steps.last,
            lastStep === step {
             Cucumber.shared.afterFeatureHooks.forEach { $0.hook(feature) }
-            let result: Reporter.Result = (feature.scenarios.contains { $0.steps.contains { $0.result == .failed } }) ? .failed : .passed
+            let result: Reporter.Result = (feature.scenarios.contains { $0.steps.contains { $0.result == .failed } }) ? .skipped : .passed
             reporters.forEach { $0.didFinish(feature: feature,
                                              result: result,
                                              duration: Measurement(value: Date().timeIntervalSince(feature.startDate),

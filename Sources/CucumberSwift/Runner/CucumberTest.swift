@@ -165,7 +165,9 @@ extension Step {
                 Cucumber.shared.reporters.forEach { $0.didStart(step: self, at: startTime) }
                 XCTAssertNoThrow(try self.run())
                 self.endTime = Date()
-                Cucumber.shared.reporters.forEach { $0.didFinish(step: self, result: self.result, duration: self.executionDuration) }
+                Cucumber.shared.reporters.forEach {
+                    $0.didFinish(step: self, result: self.result, duration: self.executionDuration)
+                }
             }
 
             #if compiler(>=5)
@@ -181,6 +183,11 @@ extension Step {
     }
 
     fileprivate func run() throws {
+        if self.scenario?.containsTag(.skipped) ?? false {
+            result = .skipped
+            return
+        }
+
         if let `class` = executeClass, let selector = executeSelector {
             executeInstance = (`class` as? NSObject.Type)?.init()
             if let instance = executeInstance,

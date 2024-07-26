@@ -129,7 +129,7 @@ public class Lexer: StringReader {
         switch char {
             case .newLine: return advance(.newLine(position))
             case .comment: return readComment()
-            case .tagMarker: return advance(.tag(position, readLineUntil({ !$0.isTagCharacter })))
+            case .tagMarker: return advance(.tag(position, Tag(readLineUntil({ !$0.isTagCharacter }))))
             case .tableCellDelimiter:
                 let tableCellContents = advance(readCell())
                 if currentChar != Character.tableCellDelimiter {

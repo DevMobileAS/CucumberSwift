@@ -12,7 +12,7 @@ public struct ScenarioOutline: ScenarioDSL {
     public var scenarios: [Scenario] = []
 
     @discardableResult public init<T>(_ title: String,
-                                      tags: [String] = [],
+                                      tags: [Tag] = [],
                                       headers: T.Type,
                                       line: UInt = #line,
                                       column: UInt = #column,
@@ -27,7 +27,7 @@ public struct ScenarioOutline: ScenarioDSL {
     }
 
     @discardableResult public init<T>(_ title: String,
-                                      tags: [String] = [],
+                                      tags: [Tag] = [],
                                       headers: T.Type,
                                       line: UInt = #line,
                                       column: UInt = #column,
@@ -42,7 +42,7 @@ public struct ScenarioOutline: ScenarioDSL {
     }
 
     @discardableResult public init<T>(_ title: (T) -> String,
-                                      tags: [String] = [],
+                                      tags: [Tag] = [],
                                       headers: T.Type,
                                       line: UInt = #line,
                                       column: UInt = #column,
@@ -57,7 +57,7 @@ public struct ScenarioOutline: ScenarioDSL {
     }
 
     @discardableResult public init<T>(_ title: (T) -> String,
-                                      tags: [String] = [],
+                                      tags: [Tag] = [],
                                       headers: T.Type,
                                       line: UInt = #line,
                                       column: UInt = #column,

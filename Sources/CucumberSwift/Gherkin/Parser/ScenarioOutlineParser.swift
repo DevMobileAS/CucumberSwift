@@ -9,7 +9,7 @@
 import Foundation
 
 enum ScenarioOutlineParser {
-    static func parse(_ scenarioOutlineNode: AST.ScenarioOutlineNode, featureTags: [String], backgroundStepNodes: [AST.StepNode], uri: String = "") -> [Scenario] {
+    static func parse(_ scenarioOutlineNode: AST.ScenarioOutlineNode, featureTags: [Tag], backgroundStepNodes: [AST.StepNode], uri: String = "") -> [Scenario] {
         let tags = featureTags.appending(contentsOf: scenarioOutlineNode.tokens.compactMap {
             if case Lexer.Token.tag(_, let tag) = $0 {
                 return tag
@@ -44,7 +44,7 @@ enum ScenarioOutlineParser {
 
     private static func parseExample(titleLine: [Lexer.Token]?,
                                      tokens: [Lexer.Token],
-                                     outlineTags: [String],
+                                     outlineTags: [Tag],
                                      stepNodes: [AST.StepNode],
                                      backgroundStepNodes: [AST.StepNode],
                                      uri: String) -> [Scenario] {

@@ -12,7 +12,7 @@ public class Feature: Taggable, Positionable {
     public private(set)  var desc = ""
     public private(set)  var scenarios = [Scenario]()
     public private(set)  var uri: String = ""
-    public internal(set) var tags = [String]()
+    public internal(set) var tags = [Tag]()
     public private(set)  var location: Lexer.Position
     public private(set)  var endLocation: Lexer.Position
     internal var startDate = Date()
@@ -46,7 +46,7 @@ public class Feature: Taggable, Positionable {
         endLocation ?= scenarios.last?.endLocation
     }
 
-    init(with scenarios: [Scenario], title: String?, description: String = "", tags: [String], position: Lexer.Position, file: StaticString = #file) {
+    init(with scenarios: [Scenario], title: String?, description: String = "", tags: [Tag], position: Lexer.Position, file: StaticString = #file) {
         location = position
         endLocation = scenarios.last?.endLocation ?? .start
         self.scenarios = scenarios
@@ -57,7 +57,7 @@ public class Feature: Taggable, Positionable {
         self.uri = String(file)
     }
 
-    public func containsTags(_ tags: [String]) -> Bool {
+    public func containsTags(_ tags: [Tag]) -> Bool {
         if (tags.contains { containsTag($0) }) {
             return true
         }

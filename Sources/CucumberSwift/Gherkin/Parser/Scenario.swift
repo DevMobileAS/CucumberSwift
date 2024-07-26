@@ -9,14 +9,14 @@
 import Foundation
 public class Scenario: NSObject, Taggable, Positionable {
     public private(set)  var title = ""
-    public private(set)  var tags = [String]()
+    public private(set)  var tags = [Tag]()
     public internal(set) var steps = [Step]()
     public internal(set) var feature: Feature?
     public private(set)  var location: Lexer.Position
     public private(set)  var endLocation: Lexer.Position
     internal var startDate = Date()
 
-    init(with node: AST.ScenarioNode, tags: [String], stepNodes: [AST.StepNode]) {
+    init(with node: AST.ScenarioNode, tags: [Tag], stepNodes: [AST.StepNode]) {
         location = node.tokens.first?.position ?? .start
         endLocation = .start
         super.init()
@@ -34,7 +34,7 @@ public class Scenario: NSObject, Taggable, Positionable {
         endLocation ?= steps.last?.location
     }
 
-    init(with steps: [Step], title: String?, tags: [String], position: Lexer.Position) {
+    init(with steps: [Step], title: String?, tags: [Tag], position: Lexer.Position) {
         location = position
         endLocation = position
         super.init()
@@ -58,7 +58,7 @@ public class Scenario: NSObject, Taggable, Positionable {
         }
     }
 
-    public func containsTags(_ tags: [String]) -> Bool {
+    public func containsTags(_ tags: [Tag]) -> Bool {
         tags.contains { containsTag($0) }
     }
 

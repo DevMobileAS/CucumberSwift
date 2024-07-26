@@ -87,7 +87,7 @@ extension CucumberJSONReporter {
         let keyword: String = "Feature"
         var elements: [Scenario] = []
         let line: UInt
-        var tags: [String] = []
+        var tags: [Tag] = []
 
         init(_ feature: CucumberSwift.Feature) {
             uri = feature.uri
@@ -108,7 +108,7 @@ extension CucumberJSONReporter {
         let description: String
         var steps: [Step] = []
         var line: UInt
-        var tags: [String] = []
+        var tags: [Tag] = []
 
         init(_ scenario: CucumberSwift.Scenario) {
 //            #warning("Add better id logic so all whitespace is replaced")

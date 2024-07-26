@@ -28,14 +28,14 @@ public protocol ScenarioDSL {
 
 extension Scenario {
     public convenience init(_ title: String,
-                            tags: [String] = [],
+                            tags: [Tag] = [],
                             line: UInt = #line,
                             column: UInt = #column,
                             @StepBuilder _ content: () -> [StepDSL]) {
         self.init(with: content(), title: title, tags: tags, position: Lexer.Position(line: line, column: column))
     }
     public convenience init(_ title: String,
-                            tags: [String] = [],
+                            tags: [Tag] = [],
                             line: UInt = #line,
                             column: UInt = #column,
                             @StepBuilder _ content: () -> StepDSL) {

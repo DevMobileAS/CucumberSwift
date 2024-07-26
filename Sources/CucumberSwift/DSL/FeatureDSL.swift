@@ -9,7 +9,7 @@
 import Foundation
 extension Feature {
     @discardableResult public convenience init(_ title: String,
-                                               tags: [String] = [],
+                                               tags: [Tag] = [],
                                                line: UInt = #line,
                                                column: UInt = #column,
                                                file: StaticString = #file,
@@ -24,7 +24,7 @@ extension Feature {
         Cucumber.shared.features.append(self)
     }
     @discardableResult public convenience init(_ title: String,
-                                               tags: [String] = [],
+                                               tags: [Tag] = [],
                                                line: UInt = #line,
                                                column: UInt = #column,
                                                file: StaticString = #file,

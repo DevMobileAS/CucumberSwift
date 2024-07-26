@@ -8,7 +8,7 @@
 
 import Foundation
 enum RuleParser {
-    static func parse(_ ruleNode: AST.RuleNode, featureTags: [String], backgroundStepNodes: [AST.StepNode]) -> [Scenario] {
+    static func parse(_ ruleNode: AST.RuleNode, featureTags: [Tag], backgroundStepNodes: [AST.StepNode]) -> [Scenario] {
         let backgroundSteps: [AST.StepNode] = backgroundStepNodes.appending(contentsOf:
             ruleNode.children
             .compactMap { $0 as? AST.BackgroundNode }

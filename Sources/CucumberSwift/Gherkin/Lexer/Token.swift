@@ -34,7 +34,7 @@ extension Lexer {
         case match(Lexer.Position, String)
         case title(Lexer.Position, String)
         case description(Lexer.Position, String)
-        case tag(Lexer.Position, String)
+        case tag(Lexer.Position, Tag)
         case tableHeader(Lexer.Position, String)
         case tableCell(Lexer.Position, Token)
         case scope(Lexer.Position, Scope)
